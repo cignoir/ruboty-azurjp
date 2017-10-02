@@ -38,7 +38,6 @@ module Ruboty
         message.reply("```#{table}```")
       end
 
-      private
       def forall?(arr,&b)
         return true if arr.empty?
         top = arr.shift
