@@ -35,7 +35,7 @@ module Ruboty
         end
 
         table = Terminal::Table.new(headings: headings, rows: rows)
-        message.reply('\n' + table)
+        message.reply('```' + table + '```')
       end
     end
   end
