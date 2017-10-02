@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'terminal-table'
+require 'kconv'
 
 module Ruboty
   module Handlers
@@ -14,7 +15,7 @@ module Ruboty
       def search(message)
         headings = []
         rows = []
-        keyword = message[:keyword].encode('UTF-8')
+        keyword = Kconv.toutf8(message[:keyword])
 
         uri = 'http://azurlane.wikiru.jp/index.php?%A5%AD%A5%E3%A5%E9%A5%AF%A5%BF%A1%BC%A5%EA%A5%B9%A5%C8'
         open(uri, 'r:EUC-JP') do |data|
