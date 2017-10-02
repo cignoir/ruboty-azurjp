@@ -24,12 +24,12 @@ module Ruboty
           table_header = table.children.take(1).first
           table_body = table.children.drop(1)
 
-          headings = table_header.children.map(&:children).map(&:children).flatten.map(&:text)
+          headings = table_header.children.map(&:children).map(&:children).flatten.map(&:text).take(15)
 
           table_body.each do |row|
             row.children.each do |tr|
               tmp = tr.children.map(&:text)
-              rows << tmp unless keywords.map{ |word| tmp.join.include?(word) }.include?(false)
+              rows << tmp.take(15) unless keywords.map{ |word| tmp.join.include?(word) }.include?(false)
             end
           end
         end
