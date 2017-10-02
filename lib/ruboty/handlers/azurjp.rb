@@ -29,19 +29,13 @@ module Ruboty
           table_body.each do |row|
             row.children.each do |tr|
               tmp = tr.children.map(&:text)
-              rows << tmp if keywords.forall?{ |word| tmp.join.include?(word) }
+              rows << tmp unless keywords.map{ |word| tmp.join.include?(word) }.include?(false)
             end
           end
         end
 
         table = Terminal::Table.new(headings: headings, rows: rows)
         message.reply("```#{table}```")
-      end
-
-      def forall?(arr,&b)
-        return true if arr.empty?
-        top = arr.shift
-        b.call(top) && forall?(arr,&b)
       end
     end
   end
