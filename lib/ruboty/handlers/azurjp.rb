@@ -28,7 +28,7 @@ module Ruboty
 
           table_body.each do |row|
             row.children.each do |tr|
-              tmp = tr.children.map(&:text)
+              tmp = tr.children.map(&:text).map{ |td| td.gsub('ﾛｲﾔﾙ', 'ロイヤル').gsub('ﾕﾆｵﾝ', 'ユニオン') }
               rows << tmp.take(15) unless keywords.map{ |word| tmp.join.include?(word) }.include?(false)
             end
           end
