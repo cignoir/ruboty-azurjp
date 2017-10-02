@@ -15,7 +15,7 @@ module Ruboty
       def search(message)
         headings = []
         rows = []
-        keyword = Kconv.toutf8(message[:keyword])
+        keywords = Kconv.toutf8(message[:keyword]).split(' ')
 
         uri = 'http://azurlane.wikiru.jp/index.php?%A5%AD%A5%E3%A5%E9%A5%AF%A5%BF%A1%BC%A5%EA%A5%B9%A5%C8'
         open(uri, 'r:EUC-JP') do |data|
@@ -29,13 +29,20 @@ module Ruboty
           table_body.each do |row|
             row.children.each do |tr|
               tmp = tr.children.map(&:text)
-              rows << tmp if tmp.join.include?(keyword)
+              rows << tmp if keywords.forall?{ |word| tmp.join.include?(word) }
             end
           end
         end
 
         table = Terminal::Table.new(headings: headings, rows: rows)
         message.reply("```#{table}```")
+      end
+
+      private
+      def forall?(arr,&b)
+        return true if arr.empty?
+        top = arr.shift
+        b.call(top) && forall?(arr,&b)
       end
     end
   end
