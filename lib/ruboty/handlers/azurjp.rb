@@ -6,7 +6,7 @@ module Ruboty
   module Handlers
     class Azurjp < Base
       on(
-          /(az|azur|azurlane)\s*(?<keyword>.*?>)\z/i,
+          /(az|azur|azurlane)\s+?(?<keyword>.*?)\z/i,
           name: 'search',
           description: 'Azurlane helper'
       )
