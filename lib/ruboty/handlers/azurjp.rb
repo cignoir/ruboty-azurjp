@@ -27,7 +27,7 @@ module Ruboty
           table_body.each do |row|
             row.children.each do |tr|
               tmp = tr.children.map(&:text)
-              rows << tmp if tmp.join.contains(message[:keyword])
+              rows << tmp if tmp.join.include?(message[:keyword])
             end
           end
         end
